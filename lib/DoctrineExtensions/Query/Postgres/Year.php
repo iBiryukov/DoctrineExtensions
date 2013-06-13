@@ -22,6 +22,7 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
  *
  * @category    DoctrineExtensions
  * @package     DoctrineExtensions\Query\Postgres
+ * @author      Rafael Kassner <kassner@gmail.com>
  * @author      Ilya Biryukov <ilya@cookfuture.com>
  * @license     MIT License
  */

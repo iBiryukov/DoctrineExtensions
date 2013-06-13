@@ -1,4 +1,5 @@
 <?php
+
 /*
  * DoctrineExtensions Mysql Function Pack
  *
@@ -17,16 +18,17 @@ use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * "MONTH" "(" SimpleArithmeticExpression ")". 
+ * "WEEK" "(" SimpleArithmeticExpression ")". Modified from DoctrineExtensions\Query\Mysql\Year
  *
  * @category    DoctrineExtensions
- * @package     DoctrineExtensions\Query\Postgres
+ * @package     DoctrineExtensions\Query\Mysql
  * @author      Rafael Kassner <kassner@gmail.com>
  * @author      Sarjono Mukti Aji <me@simukti.net>
+ * @author      Łukasz Nowicki <lukasz.mnowicki@gmail.com>
  * @author 		Ilya Biryukov <ilya@cookfuture.com>
  * @license     MIT License
  */
-class Month extends FunctionNode
+class Week extends FunctionNode
 {
     public $date;
 
@@ -35,7 +37,7 @@ class Month extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return "EXTRACT(MONTH FROM " . $sqlWalker->walkArithmeticPrimary($this->date) . ")";
+        return "EXTRACT(WEEK FROM " . $sqlWalker->walkArithmeticPrimary($this->date) . ")";
     }
 
     /**
@@ -51,4 +53,3 @@ class Month extends FunctionNode
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }
-
