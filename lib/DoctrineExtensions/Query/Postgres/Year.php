@@ -1,4 +1,5 @@
 <?php
+
 /*
  * DoctrineExtensions Mysql Function Pack
  *
@@ -17,14 +18,14 @@ use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 /**
- * "MONTH" "(" SimpleArithmeticExpression ")". 
+ * "YEAR" "(" SimpleArithmeticExpression ")"
  *
  * @category    DoctrineExtensions
  * @package     DoctrineExtensions\Query\Postgres
- * @author 		Ilya Biryukov <ilya@cookfuture.com>
+ * @author      Ilya Biryukov <ilya@cookfuture.com>
  * @license     MIT License
  */
-class Month extends FunctionNode
+class Year extends FunctionNode
 {
     public $date;
 
@@ -33,7 +34,7 @@ class Month extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return "EXTRACT(MONTH FROM " . $sqlWalker->walkArithmeticPrimary($this->date) . ")";
+        return "EXTRACT(YEAR FROM " . $sqlWalker->walkArithmeticPrimary($this->date) . ")";
     }
 
     /**
@@ -41,6 +42,8 @@ class Month extends FunctionNode
      */
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
+        $lexer = $parser->getLexer();
+
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
@@ -49,4 +52,3 @@ class Month extends FunctionNode
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 }
-
