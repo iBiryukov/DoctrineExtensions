@@ -4,7 +4,7 @@ namespace DoctrineExtensions\Query\Postgres;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode,
 Doctrine\ORM\Query\Lexer;
 
-class Floor
+class Floor extends FunctionNode
 {
     /**
      * @var \Doctrine\ORM\Query\AST\SimpleArithmeticExpression
