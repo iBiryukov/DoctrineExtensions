@@ -6,14 +6,19 @@ Doctrine\ORM\Query\Lexer;
 
 class Floor
 {
-    private $number;
-    
+    /**
+     * @var \Doctrine\ORM\Query\AST\SimpleArithmeticExpression
+     */
+    public $simpleArithmeticExpression;
+
     /**
      * @override
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return "FLOOR( " . $sqlWalker->walkArithmeticPrimary($this->number) . ")";
+        return 'FLOOR(' . $sqlWalker->walkSimpleArithmeticExpression(
+            $this->simpleArithmeticExpression
+        ) . ')';
     }
 
     /**
@@ -24,7 +29,7 @@ class Floor
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
-        $this->number = $parser->ArithmeticPrimary();
+        $this->simpleArithmeticExpression = $parser->SimpleArithmeticExpression();
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
