@@ -8,3 +8,5 @@ build/
 .project
 
 tests/Entities/Proxies
+vendor
+composer.lock
